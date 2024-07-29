@@ -1,0 +1,35 @@
+<div class=" w-full px-16 mt-8 ">
+  <div class="flex justify-center">
+    <div class="grid grid-cols-3 mt-4 gap-4 bg-third rounded-3xl py-8 px-10">
+      <div>
+        <input [disabled]="loading"  type="file" (change)="onFileSelected($event)" class=" w-full mt-1 h-8 border-2 border-gray-400 rounded file:bg-white file:border-0 disabled:cursor-not-allowed   " name="threshold"  >
+      </div>
+      <div>
+        <select [disabled]="loading"  name="type" id="type"  [(ngModel)]="typeId" class=" w-full mt-1 h-8 border-2 border-gray-400 rounded disabled:cursor-not-allowed  " *ngIf="types$ | async as types">
+          <option *ngFor="let type of types" [value]="type.id" > {{type.name}}</option>
+        </select>
+      </div>
+      <div>
+        <button [disabled]="loading || typeId == 0 ||image1 ==null" class="bg-gray-100 text-black py-1 w-full px-4 border-2 border-gray-600 disabled:cursor-not-allowed rounded" (click)="submit()" >Scan</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="mt-8 flex justify-center" >
+    @if(loading){
+
+      <p-progressSpinner ariaLabel="loading" />
+    }
+    @else{
+
+      <div class="grid grid-cols-1 gap-8 mb-4">
+      <div *ngFor="let item of obj | keyValue">
+        <strong>{{ item.key }}:</strong> {{ item.value }}
+      </div>
+    </div>
+
+    }
+
+
+  </div>
+</div>

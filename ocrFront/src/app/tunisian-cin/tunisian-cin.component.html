@@ -1,0 +1,104 @@
+<div class="grid grid-cols-3 gap-10 mt-4 px-[20%]">
+  <div>
+    <label  class="sr-only">Choose file</label>
+    <input type="file" (change)="onFileChange($event, 'image1')" accept="image/*" class="hover:cursor-pointer   w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+    file:bg-gray-50 file:border-0
+    file:me-4
+    file:py-3 file:px-4
+    file:cursor-pointer
+   ">
+
+
+  </div>
+  <div>
+    <label  class="sr-only">Choose file</label>
+    <input type="file" (change)="onFileChange($event, 'image2')" accept="image/*" class=" hover:cursor-pointer   w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+    file:bg-gray-50 file:border-0
+    file:me-4
+    file:py-3 file:px-4
+    file:cursor-pointer
+   ">
+
+  </div>
+  <div class="flex justify-center">
+    <button [disabled]="!(image1 && image2)" class="rounded-lg border-2 border-gray-200 text-gray-600 py-1 px-2 disable:cursor-not-allowed"   (click)="onSubmit()">Upload CIN</button>
+  </div>
+
+</div>
+<div class="grid grid-cols-3 gap-10 mt-4 px-[20%]">
+  <div>
+    <label  class="sr-only">Choose Passport</label>
+    <input type="file" (change)="onFileChange($event, 'image1')" accept="image/*" class="hover:cursor-pointer   w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+    file:bg-gray-50 file:border-0
+    file:me-4
+    file:py-3 file:px-4
+    file:cursor-pointer
+   ">
+
+
+  </div>
+  <div class="flex justify-center">
+    <button  class="rounded-lg border-2 border-gray-200 text-gray-600 py-1 px-2 disable:cursor-not-allowed"   (click)="onSubmitPassport()">Upload Passport</button>
+  </div>
+
+
+</div>
+<div class=" flex justify-center bg-third rounded-3xl   py-2 m-12 ">
+  <!--
+  Heads up! 👋
+
+  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
+-->
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y-2 divide-gray-200   text-sm" *ngIf="users$ | async as users">
+      <thead class="ltr:text-left rtl:text-right">
+      <tr>
+
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Last Name</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">First Name</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Address</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Serial Number</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Serial Date</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Job</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Gender</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Birthday</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Status</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nationality</th>
+        <th class="px-4 py-2"></th>
+      </tr>
+      </thead>
+
+      <tbody class="divide-y divide-gray-200">
+      <tr *ngFor="let user of users">
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900" >
+          @if(!editable){
+        <span (click)="edit()">  {{ user.lastName }}</span>
+          } @else {
+          <input class="  w-full border border-gray-200 shadow-sm rounded-lg " type="text" [value]="user.lastName">
+          }
+        </td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.firstName }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.address }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.serial }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.serialDate }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.job }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.gender }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.birthday }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.status }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.nationality }}</td>
+
+
+        <td class="whitespace-nowrap px-4 py-2">
+          <button
+            (click)="delete(user.id)"
+            class="inline-block rounded bg-red-100 px-4 py-2 text-xs font-medium text-red-600 border-2 border-red-600 hover:bg-red-200"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

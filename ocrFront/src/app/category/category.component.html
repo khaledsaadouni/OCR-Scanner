@@ -1,0 +1,84 @@
+
+<div class="flex justify-end mb-4 px-12 mt-8">
+  <button class="bg-gray-100 text-black py-1 px-4 border-2 border-gray-600 rounded" (click)="add()">Add New</button>
+</div>
+
+<div class="grid grid-cols-4 gap-8 mt-8 px-12 ">
+
+  <form #typeForm="ngForm">
+    <div class="grid grid-cols-1 gap-8 bg-third rounded-3xl py-2 px-4" *ngIf="addCategory">
+      <div>
+        <label class="font-bold"> Type Name</label>
+        <input type="text" class="w-full mt-1 h-8 border-2 border-gray-200 rounded" name="name" [(ngModel)]="type.name">
+      </div>
+      <div>
+        <label class="font-bold"> Dimensions</label>
+        <div class="flex justify-center gap-2 ">
+          <div>
+            <input type="number" class=" w-24  mt-1 h-8 border-2 border-gray-200 rounded" name="width"
+                   [(ngModel)]="type.width">
+          </div>
+          <div class="pt-1 font-bold  ">
+            x
+          </div>
+          <div>
+            <input type="number" class="  w-24 mt-1 h-8 border-2 border-gray-200 rounded" name="height"
+                   [(ngModel)]="type.height">
+          </div>
+        </div>
+      </div>
+      <div>
+        <label class="font-bold"> Threshold</label>
+        <input type="number" class="w-full mt-1 h-8 border-2 border-gray-200 rounded" name="threshold"
+               [(ngModel)]="type.threshold">
+      </div>
+      <div>
+        <label class="font-bold"> Crop</label>
+        <input type="checkbox" class=" ml-4 mt-1 h-4 border-2 border-gray-200 rounded" name="crop"
+               [(ngModel)]="type.crop">
+      </div>
+      <div>
+        <label class="font-bold"> Image Example</label>
+        <input type="file" (change)="onFileSelected($event)"
+               class="w-full mt-1 h-8 border-2 border-gray-200 rounded file:bg-white file:border-0    "
+               name="threshold">
+      </div>
+      @if (loading) {
+        <div class="flex justify-center">
+          <p-progressSpinner ariaLabel="loading"/>
+
+        </div>
+      } @else {
+        <div>
+
+          <button class="bg-gray-100 text-black py-1 w-full px-4 border-2 border-gray-600 rounded" (click)="submit()">
+            Add
+          </button>
+        </div>
+      }
+    </div>
+  </form>
+  <div [ngClass]="{
+    'col-span-4': !addCategory,
+    'col-span-3': addCategory
+  }">
+    <div class="grid grid-cols-3 gap-8" *ngIf="types$ |async as types">
+      <div class="bg-third rounded-3xl py-2 px-4" *ngFor="let type of types">
+        <h1 class="text-3xl font-bold"> {{ type.name }}</h1>
+        <h2 class="mt-2">Dimensions:  {{ type.width }} x  {{ type.height }}</h2>
+        <h2 class="mt-2"> Threshold:  {{ type.threshold }}</h2>
+        <h2 class="mt-2"> Crop:  {{ type.crop }}</h2>
+        <h2 class="mt-2"> Labels:  {{ type.labels.length }}</h2>
+        <div class="flex justify-center mt-2 gap-4">
+          <button [routerLink]="['/editor']" [queryParams]="{id:type.id}"
+                  class="bg-gray-100 text-gray-600 py-1 w-full px-4 border-2 border-gray-600 rounded">Edit
+          </button>
+          <button class="bg-red-100 text-red-600 py-1 w-full px-4 border-2 border-red-600 rounded"
+                  (click)="delete(type.id)">Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,62 @@
+<div class="flex justify-center mt-4 px-[40%]">
+  <label for="file-input" class="sr-only">Choose file</label>
+  <input (change)="onFileSelected($event)" type="file" name="file-input" id="file-input" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+    file:bg-gray-50 file:border-0
+    file:me-4
+    file:py-3 file:px-4
+   ">
+
+</div>
+<div class=" flex justify-center bg-third rounded-3xl   py-2 m-12 ">
+  <!--
+  Heads up! 👋
+
+  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
+-->
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y-2 divide-gray-200   text-sm" *ngIf="users$ | async as users">
+      <thead class="ltr:text-left rtl:text-right">
+      <tr>
+
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Last Name</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">First Name</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Address</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Serial Number</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Serial Date</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Job</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Gender</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Religion</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Status</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">ID Exp.</th>
+        <th class="px-4 py-2"></th>
+      </tr>
+      </thead>
+
+      <tbody class="divide-y divide-gray-200">
+      <tr *ngFor="let user of users">
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.lastName }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.firstName }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.address }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.serial }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.serialDate }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.job }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.gender }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.religion }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.status }}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ user.deadline }}</td>
+
+
+        <td class="whitespace-nowrap px-4 py-2">
+          <a
+            href="#"
+            class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+          >
+            View
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
